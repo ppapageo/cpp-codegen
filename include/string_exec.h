@@ -10,7 +10,7 @@ class StringCompile
 	std::stringstream program;
 	std::stringstream cmp_cmd;
 	public:
-	StringCompile();
+	StringCompile(const char* cmpflagfile= "../cmpflags.txt" );
 	void append(std::string str);
 	void append(const char* file);
 	void file2string(const char* file, std::string* string);
@@ -26,7 +26,7 @@ class StringExec
 
 	public:
 	void (*func)(...);
-	void openlib();
+	void openlib(const char* filename = "./tmpfiles/libtmp.so");
 	void loadlib(const char* libname);
 	void closelib();
 };

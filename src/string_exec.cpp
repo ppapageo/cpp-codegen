@@ -1,8 +1,8 @@
 #include "string_exec.h"
-StringCompile::StringCompile(){
+StringCompile::StringCompile(const char* cmpflagfile){
 	this->program<<"";
 	std::string cmpflags;
-	file2string("../cmpflags.txt", &cmpflags);
+	file2string(cmpflagfile, &cmpflags);
 	this->cmp_cmd<<"${CXX} -fPIC -shared"<<cmpflags<<" -o tmpfiles/libtmp.so tmpfiles/tmp.cpp";
 }
 void StringCompile::save(){
@@ -33,7 +33,7 @@ void StringCompile::append(const char* file){
 void StringCompile::file2string(const char* file, std::string* string){
 	std::ifstream t(file);
 	if (!t){
-		std::cout << "Failed to open file: "<< file <<"\n";
+		std::cerr << "Failed to open file: "<< file <<"\n";
 		exit(1);
 	}
 	std::stringstream buffer;
@@ -55,18 +55,18 @@ void StringCompile::compile(int verbose){
 	if(verbose==1)	std::cout<<this->cmp_cmd.str()<<"\n";
 	system(this->cmp_cmd.str().c_str());
 }
-void StringExec::openlib(){
-	std::string filename = "./tmpfiles/libtmp.so";
-	this->fnhandle = dlopen(filename.c_str(),RTLD_LAZY);
+void StringExec::openlib(const char* filename){
+	//std::string filename = "./tmpfiles/libtmp.so";
+	this->fnhandle = dlopen(filename,RTLD_LAZY);
 	if (!this->fnhandle) {
-		std::cerr << "Cannot load library: " << dlerror() << '\n';
+		std::cerr << dlerror() << '\n';
 		exit(1);
 	}
 }
 void StringExec::loadlib(const char* libname){
 	*(void**)(&this->func) = dlsym(this->fnhandle, libname);
 	if (!this->func){
-		std::cerr << "Cannot load library: " << dlerror() << '\n';
+		std::cerr << dlerror() << '\n';
 		exit(1);
 	}
 	
