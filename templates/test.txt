@@ -1,0 +1,8 @@
+#include <iostream>
+#include <sstream>
+#include <string>
+using namespace std;
+extern "C" int func()
+{
+	return $string_hook;
+}

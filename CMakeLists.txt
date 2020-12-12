@@ -39,6 +39,10 @@ file(COPY ${PROJECT_SOURCE_DIR}/templates DESTINATION ${PROJECT_SOURCE_DIR}/buil
 include_directories(include)
 set(SOURCE_DIR "src/")
 add_subdirectory(${SOURCE_DIR})
+
+set(TEST_DIR "test/")
+enable_testing()
+add_subdirectory(${TEST_DIR})
 #============= Install ======================
 
 install(FILES cmpflags.txt
