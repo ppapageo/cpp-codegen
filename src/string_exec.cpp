@@ -1,14 +1,18 @@
 #include "string_exec.h"
-StringCompile::StringCompile(const char* cmpflagfile){
+
+StringCompile::StringCompile(const char* cmpflagfile, const char* sav_dir_arg , const char* sav_name_arg ){
 	this->program<<"";
 	std::string cmpflags;
 	file2string(cmpflagfile, &cmpflags);
-	this->cmp_cmd<<"${CXX} -fPIC -shared"<<cmpflags<<" -o tmpfiles/libtmp.so tmpfiles/tmp.cpp";
+	sav_dir = sav_dir_arg;
+	sav_name = sav_name_arg;
+	this->cmp_cmd<<"${CXX} -fPIC -shared"<<cmpflags<<" -o "<< sav_dir<<"/"<<sav_name<<"lib"<<sav_name<<".so "<<sav_dir<<"/"<<sav_name<<".cpp";
 }
 void StringCompile::save(){
-	system("mkdir -p tmpfiles");
+	std::string cmd = "mkdir -p " + sav_dir;
+	system(cmd.c_str());
 	std::string cppname = "";
-	cppname = "tmpfiles/tmp.cpp";
+	cppname = sav_dir+"/"+sav_name+".cpp";
 	std::ofstream out(cppname.c_str());
     out << this->program.str();
     out.close();
@@ -56,7 +60,6 @@ void StringCompile::compile(int verbose){
 	system(this->cmp_cmd.str().c_str());
 }
 void StringExec::openlib(const char* filename){
-	//std::string filename = "./tmpfiles/libtmp.so";
 	this->fnhandle = dlopen(filename,RTLD_LAZY);
 	if (!this->fnhandle) {
 		std::cerr << dlerror() << '\n';

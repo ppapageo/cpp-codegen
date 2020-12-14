@@ -9,8 +9,11 @@ class StringCompile
 {
 	std::stringstream program;
 	std::stringstream cmp_cmd;
+	std::string sav_dir;
+	std::string sav_name;
+
 	public:
-	StringCompile(const char* cmpflagfile= "../cmpflags.txt" );
+	StringCompile(const char* cmpflagfile= "../cmpflags.txt", const char* sav_dir_arg = "tmpfiles", const char* sav_name_arg = "tmp" );
 	void append(std::string str);
 	void append(const char* file);
 	void file2string(const char* file, std::string* string);
