@@ -6,7 +6,7 @@ StringCompile::StringCompile(const char* cmpflagfile, const char* sav_dir_arg , 
 	file2string(cmpflagfile, &cmpflags);
 	sav_dir = sav_dir_arg;
 	sav_name = sav_name_arg;
-	this->cmp_cmd<<"${CXX} -fPIC -shared"<<cmpflags<<" -o "<< sav_dir<<"/"<<sav_name<<"lib"<<sav_name<<".so "<<sav_dir<<"/"<<sav_name<<".cpp";
+	this->cmp_cmd<<"${CXX} -fPIC -shared"<<cmpflags<<" -o "<< sav_dir<<"/"<<"lib"<<sav_name<<".so "<<sav_dir<<"/"<<sav_name<<".cpp";
 }
 void StringCompile::save(){
 	std::string cmd = "mkdir -p " + sav_dir;
