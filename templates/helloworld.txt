@@ -2,11 +2,7 @@
 #include <sstream>
 #include <string>
 using namespace std;
-extern "C" std::string func()
+extern "C" void func()
 {
-	cout << "I was compiled at runtime"<< endl;
-	cout << "I was called with hook: $string_hook" << endl;
-	stringstream ss;
-	ss<<"$string_hook";
-	return ss.str();
+	cout << "I was compiled at runtime with message: $string_hook" << endl;
 }
