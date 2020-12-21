@@ -14,8 +14,8 @@ class StringCompile
 
 	public:
 	StringCompile(const char* cmpflagfile= "../cmpflags.txt", const char* sav_dir_arg = "tmpfiles", const char* sav_name_arg = "tmp" );
-	void append(std::string str);
-	void append(const char* file);
+	void append_str(std::string str);
+	void append_file(const char* file);
 	void file2string(const char* file, std::string* string);
 	void replace(const std::string& from, const std::string& to);
 	void save();

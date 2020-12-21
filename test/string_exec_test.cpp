@@ -4,7 +4,7 @@
 
 TEST(StringExec, ClassTest) {
     StringCompile sc ;
-	sc.append("../templates/test.txt");
+	sc.append_file("../templates/test.txt");
 	sc.replace("$string_hook","1+2");
 	sc.save();
 	sc.compile(0);

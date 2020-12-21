@@ -26,10 +26,10 @@ void StringCompile::clear(){
 	this->program.clear();
 }
 
-void StringCompile::append(std::string str){
+void StringCompile::append_str(std::string str){
 	this->program<<str<<"\n";
 }
-void StringCompile::append(const char* file){
+void StringCompile::append_file(const char* file){
 	std::string tmpstring;
 	file2string(file,&tmpstring);
 	this->program<<tmpstring<<"\n";
