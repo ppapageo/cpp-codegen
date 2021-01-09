@@ -6,7 +6,7 @@
 class CgenConv: public BaseConv
 {
 	public:
-	StringCompile sc;
+	StringCompile sc={"../cmpflags.txt","tmpfiles","tmpconv"};
 	StringExec se;
 	CgenConv(int out_ch, int in_ch, int in_row, int in_col, int k_row, int k_col, int pad, int stride, float* input, float* kernel);
 	~CgenConv();

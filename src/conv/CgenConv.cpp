@@ -14,7 +14,7 @@ CgenConv::CgenConv(int out_ch, int in_ch, int in_row, int in_col, int k_row, int
 	sc.save();
 	sc.compile();
 
-	se.openlib();
+	se.openlib("tmpfiles/libtmpconv.so");
 	se.loadlib("func");
 
 }
