@@ -1,0 +1,23 @@
+extern "C" int func(float* input, float* kernel, float** output)
+{
+	int ki,ko,i,j,m,n,ii,jj,out_addr,k_addr,in_addr;
+	for (ki=0; ki<$in_ch; ki++){
+		for (ko=0; ko<$out_ch; ko++){
+			for(i=0; i < $out_row; i++){
+				for(j=0; j < $out_col; j++){
+					for(m=0; m < $k_row; m++){
+						for(n=0; n < $k_col; n++){
+							jj = $stride*j + n;
+							ii = $stride*i + m;
+							out_addr=(ko*$out_row+i)*$out_col+j;
+							in_addr=(ki*$in_row+ii)*$in_col+jj;
+							k_addr=((ko*$in_ch+ki)*$k_row+m)*$k_col+n;
+							(*output)[out_addr]+=input[in_addr] * kernel[k_addr];
+						}
+					}
+				}
+			}
+		}
+	}
+	return 0;
+}
