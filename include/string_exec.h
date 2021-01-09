@@ -1,3 +1,5 @@
+#ifndef STRING_EXEC_H
+#define STRING_EXEC_H
 #include <iostream>
 #include <string>
 #include <fstream>
@@ -33,3 +35,4 @@ class StringExec
 	void loadlib(const char* libname);
 	void closelib();
 };
+#endif
