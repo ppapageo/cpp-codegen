@@ -1,4 +1,4 @@
-//Usage ./time_conv <c_in> <rows> <cols> <c_out> <kRows> <kCols> <stride> <pad>
+//Usage ./time_conv <c_in> <rows> <cols> <c_out> <kRows> <kCols> <stride> <pad> <threads>
 //#include "conv.h"
 #include "conv/ConvUtils.h"
 #include "conv/VanillaConv.h"
@@ -7,9 +7,9 @@
 #include "conv/Im2colConv.h"
 int main( int argc, char** argv )
 {
-	if (argc<=8){
+	if (argc<=9){
 		std::cout<<"Too few arguments"<<"\n";
-		std::cout<<"Usage ./time_conv <c_in> <rows> <cols> <c_out> <kRows> <kCols> <stride> <pad>"<<"\n";
+		std::cout<<"Usage ./time_conv <c_in> <rows> <cols> <c_out> <kRows> <kCols> <stride> <pad> <threads>"<<"\n";
 		exit(1);
 	}
 	int in_ch=atoi(argv[1]);
@@ -23,6 +23,9 @@ int main( int argc, char** argv )
 	if (atoi(argv[8])==1){
 		pad=(k_row-1)/2;
 	}
+	int t=atoi(argv[9]);
+
+	omp_set_num_threads(t);
 	srand (static_cast <unsigned> (time(0)));
 
 	float* input = populate_rand(in_ch*in_row*in_col, 15.42, 0.42);
