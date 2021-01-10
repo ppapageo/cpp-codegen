@@ -10,3 +10,10 @@ target_link_libraries(string_exec_test GTest::GTest GTest::Main pthread string_e
 
 add_test(NAME string_exec_test
 	COMMAND string_exec_test)
+
+add_executable(conv_test conv_test.cpp)
+
+target_link_libraries(conv_test conv GTest::GTest GTest::Main pthread string_exec dl openblas)
+
+add_test(NAME conv_test
+	COMMAND conv_test)
