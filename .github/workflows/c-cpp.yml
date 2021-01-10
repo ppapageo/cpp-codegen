@@ -1,0 +1,36 @@
+name: CI
+
+on: [push]
+
+jobs:
+
+  build-examples:
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        compiler:
+          - cc: gcc
+            cxx: g++
+    env:
+      CC: gcc
+      CXX: g++
+      build_dir: build
+    steps:
+      - name: Fetch gtest
+        run: |
+         sudo apt-get install libgtest-dev
+         cd /usr/src/gtest && sudo cmake CMakeLists.txt
+         sudo make
+         sudo cp *.a /usr/lib
+         sudo ln -s /usr/lib/libgtest.a /usr/local/lib/libgtest.a
+         sudo ln -s /usr/lib/libgtest_main.a /usr/local/lib/libgtest_main.a
+      - name: Build
+        run: |
+          mkdir build && cd build
+          cmake -DCMAKE_INSTALL_PREFIX=../installed .. 
+          make -j $(nproc)
+          make install
+          cd -
+          
+      - name: Run unit tests
+        run: cd build && ctest && cd-
