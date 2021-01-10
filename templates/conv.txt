@@ -2,6 +2,7 @@ extern "C" int func(float* input, float* kernel, float** output)
 {
 	int ki,ko,i,j,m,n,ii,jj,out_addr,k_addr,in_addr;
 	for (ki=0; ki<$in_ch; ki++){
+#pragma omp parallel for private(ko,i,j,ii,jj,m,n,in_addr,out_addr,k_addr)
 		for (ko=0; ko<$out_ch; ko++){
 			for(i=0; i < $out_row; i++){
 				for(j=0; j < $out_col; j++){

@@ -5,6 +5,7 @@
 #include <cblas.h>
 #include <cstdlib>
 #include <math.h>
+#include <chrono>
 void pad_input(int in_ch, int* in_row, int* in_col, int pad, float** input);
 
 float* populate_rand(int size, float high, float low);

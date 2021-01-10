@@ -1,7 +1,7 @@
 #ifndef BASECONV_H
 #define BASECONV_H
 #include "conv/ConvUtils.h"
-
+#include <omp.h>
 class BaseConv
 {
 	public:
