@@ -17,7 +17,7 @@ jobs:
       build_dir: build
     steps:
       - name: Fetch dependencies
-        run: sudo apt-get install openblas
+        run: sudo apt-get install libopenblas-dev
       - name: Fetch gtest
         run: |
          sudo apt-get install libgtest-dev
