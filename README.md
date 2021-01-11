@@ -1,14 +1,15 @@
-cpp-codegen
+cpp-codegen [![CI](https://github.com/ppgpn/cpp-codegen/workflows/CI/badge.svg)](https://github.com/ppgpn/cpp-codegen/actions)
 ===========
 cpp-codegen is a library that generates compiles and runs C++ code at runtime.
 
-  * It is in experimental stage 
-  * Used for code specialization tasks
+  * Performs code specialization at runtime
   * Essentially JIT compilation
+  * Can produce more optimized code
+  * It is in experimental stage 
   
 Requirements
 -----------
-gtest, cmake
+gtest, cmake, libopenblas-dev
 
 Build
 -----------
@@ -21,11 +22,40 @@ make install
 Run simple example
 -----------
 ```bash
-export CXX=g++ //or your favourite C++ compiler
+export CXX=g++ //or your favorite C++ compiler
 cd <your/installation/path>/bin
 helloworld
 ```
-Create your own programm
+Run Convolution example
+-------------------
+To demonstrate the benefits to performance, two optimized functions for the convolution operation are generated
+* 1. Substitute the loop boundary variables with their runtime values
+
+* 2. Completely eliminate the 2 innermost loops traversing the kernel
+
+Performance comparison against Normal Convolution and Im2col-Gemm Convolution
+
+```bash
+export CXX=g++ //or your favorite C++ compiler
+cd <your/installation/path>/bin
+./time_conv <input channel> <input rows> <input cols> <output channel> \
+		<filter rows> <filter cols> <stride> <pad> <threads>
+```
+
+Specifically with Alexnet's conv2 layer:
+```bash
+./time_conv 96 27 27 256 5 5 1 1 1
+./time_conv 96 27 27 256 5 5 1 1 2
+```
+
+|| 1 thread  | 2 threads  |
+|---|---|---|
+| Normal|	0.378811  | 0.223168  |
+| Im2col|	0.018317  | 0.020192 |
+| Cgen-loop|	0.180567  | 0.091323  |
+| Cgen-unroll|	0.088904  | 0.045188  |
+
+Create your own program
 ---------
 ### Step 1. Create the C++ file: 
 
@@ -78,4 +108,3 @@ extern "C" int func()
 	se.closelib();
 ...
  ```
- 
