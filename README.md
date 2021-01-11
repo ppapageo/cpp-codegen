@@ -50,10 +50,13 @@ Specifically with Alexnet's conv2 layer:
 
 || 1 thread  | 2 threads  |
 |---|---|---|
-| Normal|	0.378811  | 0.223168  |
-| Im2col|	0.018317  | 0.020192 |
-| Cgen-loop|	0.180567  | 0.091323  |
-| Cgen-unroll|	0.088904  | 0.045188  |
+| Normal|	0.378811s  | 0.223168s  |
+| Im2col|	0.018317s  | 0.020192s |
+| Cgen-loop|	0.180567s  | 0.091323s  |
+| Cgen-unroll|	0.088904s  | 0.045188s  |
+
+In this case code specialization enables performance comparable to the widely used im2col-gemm implementations without their memory overheads
+
 
 Create your own program
 ---------
