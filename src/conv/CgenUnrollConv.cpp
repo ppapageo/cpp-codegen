@@ -29,7 +29,7 @@ CgenUnrollConv::CgenUnrollConv(int out_ch, int in_ch, int in_row, int in_col, in
 	sc.save();
 	sc.compile();
 
-	se.openlib("tmpfiles/libtmpunroll.so");
+	se.openlib("/tmp/cpp-codegen/libtmpunroll.so");
 	se.loadlib("func");
 
 }

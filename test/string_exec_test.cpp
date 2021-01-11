@@ -38,5 +38,5 @@ TEST(StringExec, NoFuncTest){
 	se.openlib();
 	EXPECT_EXIT({
 			se.loadlib("doesnotexist");
-			},::testing::ExitedWithCode(1), "./tmpfiles/libtmp.so: undefined symbol: doesnotexist");
+			},::testing::ExitedWithCode(1), "/tmp/cpp-codegen/libtmp.so: undefined symbol: doesnotexist");
 }

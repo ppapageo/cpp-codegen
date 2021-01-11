@@ -15,7 +15,7 @@ class StringCompile
 	std::string sav_name;
 
 	public:
-	StringCompile(const char* cmpflagfile= "../cmpflags.txt", const char* sav_dir_arg = "tmpfiles", const char* sav_name_arg = "tmp" );
+	StringCompile(const char* cmpflagfile= "../cmpflags.txt", const char* sav_dir_arg = "/tmp/cpp-codegen", const char* sav_name_arg = "tmp" );
 	void append_str(std::string str);
 	void append_file(const char* file);
 	void file2string(const char* file, std::string* string);
@@ -31,7 +31,7 @@ class StringExec
 
 	public:
 	void (*func)(...);
-	void openlib(const char* filename = "./tmpfiles/libtmp.so");
+	void openlib(const char* filename = "/tmp/cpp-codegen/libtmp.so");
 	void loadlib(const char* libname);
 	void closelib();
 };

@@ -6,7 +6,7 @@
 class CgenUnrollConv: public BaseConv
 {
 	public:
-	StringCompile sc={"../cmpflags.txt","tmpfiles","tmpunroll"};
+	StringCompile sc={"../cmpflags.txt","/tmp/cpp-codegen","tmpunroll"};
 	StringExec se;
 	CgenUnrollConv(int out_ch, int in_ch, int in_row, int in_col, int k_row, int k_col, int pad, int stride, float* input, float* kernel);
 	~CgenUnrollConv();
