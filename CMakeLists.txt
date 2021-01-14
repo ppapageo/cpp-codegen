@@ -51,6 +51,7 @@ file(WRITE build/cmpflags.txt ${CMAKE_CXX_FLAGS})
 message(STATUS "Copying templates to " ${PROJECT_SOURCE_DIR}/build)
 file(COPY ${PROJECT_SOURCE_DIR}/templates DESTINATION ${PROJECT_SOURCE_DIR}/build)
 #==========================================================
+add_subdirectory(cmake)
 
 include_directories(include)
 set(SOURCE_DIR "src/")
