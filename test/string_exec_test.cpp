@@ -3,13 +3,12 @@
 #include "gtest/gtest-death-test.h"
 
 TEST(StringExec, ClassTest) {
-    StringCompile sc ;
-	sc.append_file("../templates/test.txt");
-	sc.replace("$string_hook","1+2");
-	sc.save();
-	sc.compile(0);
-
     StringExec se;
+	se.append_file("../templates/test.txt");
+	se.replace("$string_hook","1+2");
+	se.save();
+	se.compile(0);
+
 	se.openlib();
 	se.loadlib("func");
 	int (*test)();
@@ -19,10 +18,10 @@ TEST(StringExec, ClassTest) {
 	EXPECT_EQ(3,test_res);
 }
 TEST(StringExec, FailFile2StringTest){
-	StringCompile sc;
+	StringExec se;
 	std::string string;
     EXPECT_EXIT({
-			sc.file2string("doesnotexist.txt",&string);
+			se.file2string("doesnotexist.txt",&string);
 			},::testing::ExitedWithCode(1), "Failed to open file: doesnotexist.txt");
 }
 

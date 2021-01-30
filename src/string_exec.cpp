@@ -1,6 +1,6 @@
 #include "string_exec.h"
 
-StringCompile::StringCompile(const char* cmpflagfile, const char* sav_dir_arg , const char* sav_name_arg ){
+StringExec::StringExec(const char* cmpflagfile, const char* sav_dir_arg , const char* sav_name_arg ){
 	this->program<<"";
 	std::string cmpflags;
 	file2string(cmpflagfile, &cmpflags);
@@ -8,7 +8,10 @@ StringCompile::StringCompile(const char* cmpflagfile, const char* sav_dir_arg , 
 	sav_name = sav_name_arg;
 	this->cmp_cmd<<"${CXX} -fPIC -shared"<<cmpflags<<" -o "<< sav_dir<<"/"<<"lib"<<sav_name<<".so "<<sav_dir<<"/"<<sav_name<<".cpp";
 }
-void StringCompile::save(){
+StringExec::~StringExec(){
+	this->closelib();
+}
+void StringExec::save(){
 	std::string cmd = "mkdir -p " + sav_dir;
 	system(cmd.c_str());
 	std::string cppname = "";
@@ -18,23 +21,23 @@ void StringCompile::save(){
     out.close();
 }
 
-void StringCompile::print(){
+void StringExec::print(){
 	std::cout<<this->program.str()<<"\n";
 }
-void StringCompile::clear(){
+void StringExec::clear(){
 	this->program.str(std::string());
 	this->program.clear();
 }
 
-void StringCompile::append_str(std::string str){
+void StringExec::append_str(std::string str){
 	this->program<<str<<"\n";
 }
-void StringCompile::append_file(const char* file){
+void StringExec::append_file(const char* file){
 	std::string tmpstring;
 	file2string(file,&tmpstring);
 	this->program<<tmpstring<<"\n";
 }
-void StringCompile::file2string(const char* file, std::string* string){
+void StringExec::file2string(const char* file, std::string* string){
 	std::ifstream t(file);
 	if (!t){
 		std::cerr << "Failed to open file: "<< file <<"\n";
@@ -44,7 +47,7 @@ void StringCompile::file2string(const char* file, std::string* string){
 	buffer << t.rdbuf();
 	(*string)=buffer.str();
 }
-void StringCompile::replace(const std::string& from, const std::string& to){
+void StringExec::replace(const std::string& from, const std::string& to){
 	std::string str = program.str();
 	if(from.empty())
         return;
@@ -55,7 +58,7 @@ void StringCompile::replace(const std::string& from, const std::string& to){
     }
 	this->program.str(str);
 }
-void StringCompile::compile(int verbose){
+void StringExec::compile(int verbose){
 	if(verbose==1)	std::cout<<this->cmp_cmd.str()<<"\n";
 	system(this->cmp_cmd.str().c_str());
 }

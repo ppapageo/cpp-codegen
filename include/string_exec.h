@@ -7,7 +7,8 @@
 #include <dlfcn.h>
 #include <streambuf>
 #include <sstream>
-class StringCompile
+//class StringCompile
+class StringExec
 {
 	std::stringstream program;
 	std::stringstream cmp_cmd;
@@ -15,7 +16,8 @@ class StringCompile
 	std::string sav_name;
 
 	public:
-	StringCompile(const char* cmpflagfile= "../cmpflags.txt", const char* sav_dir_arg = "/tmp/cpp-codegen", const char* sav_name_arg = "tmp" );
+	StringExec(const char* cmpflagfile= "../cmpflags.txt", const char* sav_dir_arg = "/tmp/cpp-codegen", const char* sav_name_arg = "tmp" );
+	~StringExec();
 	void append_str(std::string str);
 	void append_file(const char* file);
 	void file2string(const char* file, std::string* string);
@@ -24,9 +26,9 @@ class StringCompile
 	void print();
 	void compile(int verbose=1);
 	void clear();
-};
-class StringExec
-{
+//};
+//class StringExec
+//{
 	void* fnhandle;
 
 	public:
