@@ -67,16 +67,16 @@ This can be achieved by using plain strings or making a template:
   ```C++
 // src/mymain.cpp
 ...
-	StringCompile sc ;
+	StringExec se ;
 	std::string str;
 	str.append("extern \"C\" int func()\n");
 	str.append("{\n");
 	str.append("return 5+5;\n");
 	str.append("}\n");
  
-	sc.append(str);
-	sc.save();
-	sc.compile();
+	se.append(str);
+	se.save();
+	se.compile();
 ...
  ```
 2. Template
@@ -92,11 +92,11 @@ extern "C" int func()
  ```C++
  // src/mymain.cpp
 ...
-	StringCompile sc ;
-	sc.append("../templates/test.txt");
-	sc.replace("$hook","5+5");
-	sc.save();
-	sc.compile();
+	StringExec se ;
+	se.append("../templates/test.txt");
+	se.replace("$hook","5+5");
+	se.save();
+	se.compile();
 ...
  ```
  ### Step 2. Compile and run the function: 
@@ -104,7 +104,6 @@ extern "C" int func()
   ```C++
  // src/mymain.cpp
 ...
-	StringExec se;
 	se.openlib();
 	se.loadlib("func");
 	se.func();
