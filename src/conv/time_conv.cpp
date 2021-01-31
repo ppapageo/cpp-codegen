@@ -5,6 +5,7 @@
 #include "conv/CgenConv.h"
 #include "conv/CgenUnrollConv.h"
 #include "conv/Im2colConv.h"
+extern "C" void openblas_set_num_threads(int num_threads);
 int main( int argc, char** argv )
 {
 	if (argc<=9){
@@ -26,6 +27,7 @@ int main( int argc, char** argv )
 	int t=atoi(argv[9]);
 
 	omp_set_num_threads(t);
+	openblas_set_num_threads(t);
 	srand (static_cast <unsigned> (time(0)));
 
 	float* input = populate_rand(in_ch*in_row*in_col, 15.42, 0.42);
