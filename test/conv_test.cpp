@@ -36,7 +36,9 @@ TEST(Conv, CgenConv) {
 	float* kernel = populate_rand(out_ch*in_ch*k_row*k_col, 15.42, 0.42);
 	pad_input(in_ch, &in_row, &in_col, pad, &input);	
 	VanillaConv vc(out_ch, in_ch, in_row, in_col, k_row, k_col, pad, stride, input, kernel);
+	vc.forward();
 	CgenConv cc(out_ch, in_ch, in_row, in_col, k_row, k_col, pad, stride, input, kernel);
+	cc.forward();
 	EXPECT_EQ(true,matr_all_equal(vc.output,cc.output,vc.out_ch*vc.out_col*vc.out_row));
 	delete [] input;
 	delete [] kernel;
@@ -58,7 +60,9 @@ TEST(Conv, CgenUnrollConv) {
 	float* kernel = populate_rand(out_ch*in_ch*k_row*k_col, 15.42, 0.42);
 	pad_input(in_ch, &in_row, &in_col, pad, &input);	
 	VanillaConv vc(out_ch, in_ch, in_row, in_col, k_row, k_col, pad, stride, input, kernel);
+	vc.forward();
 	CgenUnrollConv uc(out_ch, in_ch, in_row, in_col, k_row, k_col, pad, stride, input, kernel);
+	uc.forward();
 	EXPECT_EQ(true,matr_all_equal(vc.output,uc.output,vc.out_ch*vc.out_col*vc.out_row));
 	delete [] input;
 	delete [] kernel;
@@ -80,7 +84,9 @@ TEST(Conv, Im2colConv) {
 	float* kernel = populate_rand(out_ch*in_ch*k_row*k_col, 15.42, 0.42);
 	pad_input(in_ch, &in_row, &in_col, pad, &input);	
 	VanillaConv vc(out_ch, in_ch, in_row, in_col, k_row, k_col, pad, stride, input, kernel);
+	vc.forward();
 	Im2colConv ic(out_ch, in_ch, in_row, in_col, k_row, k_col, pad, stride, input, kernel);
+	ic.forward();
 	EXPECT_EQ(true,matr_all_equal(vc.output,ic.output,vc.out_ch*vc.out_col*vc.out_row));
 	delete [] input;
 	delete [] kernel;
