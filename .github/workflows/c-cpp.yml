@@ -35,4 +35,4 @@ jobs:
           cd -
           
       - name: Run unit tests
-        run: cd build && ctest && cd -
+        run: cd build && ctest --verbose && cd -
