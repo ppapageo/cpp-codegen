@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.8)
-project(Codegen)
+project(CppCodegen)
 ### Require out-of-source builds
 file(TO_CMAKE_PATH "${PROJECT_BINARY_DIR}/CMakeLists.txt" LOC_PATH)
 if(EXISTS "${LOC_PATH}")
