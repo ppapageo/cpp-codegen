@@ -1,12 +1,22 @@
 cpp-codegen [![CI](https://github.com/ppgpn/cpp-codegen/workflows/CI/badge.svg)](https://github.com/ppgpn/cpp-codegen/actions)
 ===========
-cpp-codegen is a library that generates compiles and runs C++ code at runtime.
+Cpp-codegen is a library that generates, compiles and runs C++ code at runtime. 
 
-  * Performs code specialization at runtime
-  * Essentially JIT compilation
+  * Performs code specialization at runtime (jit compilation)
+  * Control over individual compilation parameters
   * Can produce more optimized code
-  * It is in experimental stage 
   
+The library is in experimental/development stage. 
+
+How it works
+-----
+In a nutshell, at run time the compile shell command and then the dynamic linking loader through the C interface ( system() and dlsym() respectively ).
+
+Instructions
+---------
+
+Below there are instructions to build and use the library, as well as an example demonstrating potential performance benefits.
+
 Requirements
 -----------
 gtest, cmake, libopenblas-dev
@@ -28,7 +38,7 @@ helloworld
 ```
 Run Convolution example
 -------------------
-To demonstrate the benefits to performance, two optimized functions for the convolution operation are generated
+To demonstrate the potential benefits to performance, two optimized functions for the convolution operation are generated
 * 1. Substitute the loop boundary variables with their runtime values
 
 * 2. Completely eliminate the 2 innermost loops traversing the kernel
@@ -63,7 +73,8 @@ Create your own program
 ### Step 1. Create the C++ file: 
 
 This can be achieved by using plain strings or making a template:
-1. String
+
+Case 1. String
   ```C++
 // src/mymain.cpp
 ...
@@ -79,7 +90,7 @@ This can be achieved by using plain strings or making a template:
 	se.compile();
 ...
  ```
-2. Template
+Case 2. Template
 * Create a template
  ```C++
  // templates/mytemplate.txt
@@ -110,3 +121,12 @@ extern "C" int func()
 	se.closelib();
 ...
  ```
+ 
+ TODO
+----
+
+  * [ ] Fix possible name conflict of same named generated libraries used by different programs:
+    * [ ] Use unique directory name suffix per programm or function call
+
+  * [ ] More fine grained compilation parameters:
+    * [ ] Define compilation parameters at object init as strings
