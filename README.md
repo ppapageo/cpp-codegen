@@ -10,7 +10,7 @@ The library is in experimental/development stage.
 
 How it works
 -----
-In a nutshell, at run time the compile shell command and then the dynamic linking loader through the C interface ( system() and dlsym() respectively ).
+In a nutshell, at run time, the compile shell command and then the dynamic linking loader are called through the C interfaces, system() and dlsym() respectively.
 
 Instructions
 ---------
