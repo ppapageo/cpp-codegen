@@ -9,4 +9,4 @@ target_link_libraries(helloworld string_exec dl)
 
 add_executable(time_conv conv/time_conv.cpp)
 
-target_link_libraries(time_conv conv string_exec dl openblas)
+target_link_libraries(time_conv conv string_exec dl openblas cblas)
